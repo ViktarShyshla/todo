@@ -1,0 +1,36 @@
+@import "./colors.scss";
+@import "./fonts.scss";
+
+html {
+  @include text;
+}
+
+h1 {
+  @include text;
+  margin: 0 0 1.75rem;
+  transition: all 0.3s ease-in-out;
+}
+
+p {
+  @include text;
+  margin: 0.25rem 0;
+}
+
+label {
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  color: $dark-gray;
+  text-align: center;
+  cursor: pointer;
+  z-index: 7;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    color: $dark-gray;
+}
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+}
