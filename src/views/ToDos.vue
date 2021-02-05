@@ -4,44 +4,28 @@
       <label>ToDos</label>
     </div>
     <div :class="$style.content">
-      <form :class="$style.form">
-        <Input
-          :class="$style.input"
-          v-model="text"
-          placeholder="Например, покормить кота"
-        />
-        <Button :class="$style.button" type="submit" textButton="Create" />
-      </form>
-      <div v-for="post in allTask" :key="post">
-        {{ post.task }}
+      <TaskForm />
+      <div :class="$style.list">
+        <div v-for="post in allTask" :key="post.task">
+          <p :class="$style.task" v-if="post.task">{{ post.task }}</p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Input from "@/components/basic/Input";
-import Button from "@/components/basic/Button";
-import { mapGetters, mapMutations } from "vuex";
+import TaskForm from "@/components/TaskForm";
+import { mapGetters } from "vuex";
 export default {
   components: {
-    Input,
-    Button,
+    TaskForm,
   },
-  computed: mapGetters(["allTask"]),
+  computed: mapGetters(["getActivities", "allTask"]),
   data() {
     return {
       task: "",
     };
-  },
-  methods: {
-    ...mapMutations(["createTask"]),
-    submit() {
-      this.createTask({
-        text: this.text,
-      });
-      this.text = "";
-    },
   },
 };
 </script>
@@ -66,22 +50,21 @@ export default {
     }
   }
   .content {
-    width: 50rem;
+    width: 25rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    .form {
+    .list {
       display: flex;
-      border: 0.1rem solid;
-      border-radius: 0.25rem;
-      input {
-        background: none;
-      }
-      .button {
-        background: none;
-        label {
-          font-size: 1rem;
-        }
+      flex-direction: column;
+      justify-content: flex-start;
+      width: 18rem;
+      margin: 1rem;
+      .task {
+        color: $dark-gray;
+        padding: 0.5rem 0.5rem 0;
+        box-shadow: inset 0px -1px 0px 0px rgb(0 0 0 / 20%);
+        box-sizing: border-box;
       }
     }
   }
